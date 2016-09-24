@@ -1,36 +1,10 @@
-;; WEB+DB PRESS plusシリーズ
-;; Emacs実践入門―思考を直感的にコード化し、開発を加速する
-;; サンプルinit.el
-
-;;; 注意事項 - まずはこちらをお読みください
-
-;; このサンプルコードは、書籍『Emacs実践入門』に登場する設定
-;; コードをまとめたものです。一部の設定では、拡張機能のインス
-;; トールが必須となっているため、このファイルに書かれている内
-;; 容の一部はそのまま利用することはできません。
-;; 本書を読み進めながら、必要な設定をあなたのinit.elへコピー
-;; してご利用ください。
-;; なお、拡張機能のインストールが必要な設定については、下記の
-;; ような目印を付けております。
-;; 拡張機能のインストール方法については、該当ページに詳しく記
-;; 述していますので、ぜひ参考にしてください。
-
-;; ▼要拡張機能インストール▼
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 3.2 Emacsの起動と終了                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;; P30 デバッグモードでの起動
-;; おまじない
 (require 'cl)
 ;; Emacsからの質問をy/nで回答する
 ;; (fset 'yes-or-no-p 'y-or-n-p)
 ;; スタートアップメッセージを非表示
 (setq inhibit-startup-screen t)
 
-
+(require 'egg)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 4.1 効率的な設定ファイルの作り方と管理方法             ;;
@@ -90,8 +64,6 @@
 (define-key global-map (kbd "C-c l") 'toggle-truncate-lines)
 ;; "C-t" でウィンドウを切り替える。初期値はtranspose-chars
 (define-key global-map (kbd "C-t") 'other-window)
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 5.3 環境変数の設定                                     ;;
@@ -1119,6 +1091,13 @@ Use CREATE-TEMP-F for creating temp copy."
 (add-hook 'kill-buffer-hook 'my-push-killed-file-name-list)
 ;; Mac の Command + z で閉じたバッファを復元する
 (define-key global-map (kbd "s-z") 'my-pop-killed-file-name-list)
+
+(setq dired-dwim-target t)
+(keyboard-translate ?\C-h ?\C-?)
+(global-set-key (kbd "C-x ?") 'help-command)
+
+;; 行番号表示
+;; (global-linum-mode t)
 
 ;; https://github.com/emacs-jp/init-loader
 (require "init-loader")
