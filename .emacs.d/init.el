@@ -3,8 +3,6 @@
 ;; スタートアップメッセージを非表示
 (setq inhibit-startup-screen t)
 
-(require 'egg)
-
 ;; Emacs 23より前のバージョンではuser-emacs-directory変数が未定義のため次の設定を追加
 (when (< emacs-major-version 23)
   (defvar user-emacs-directory "~/.emacs.d/"))
@@ -22,6 +20,7 @@
 ;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
 (add-to-load-path "elisp" "conf" "public_repos")
 
+(require 'egg)
 
 ;; ターミナル以外はツールバー、スクロールバーを非表示
 (when window-system
@@ -116,6 +115,8 @@
   (color-theme-initialize)
   ;; テーマhoberに変更する
   (color-theme-hober))
+
+(load-theme 'tango-dark)
 
 (when (eq window-system 'ns)
   ;; asciiフォントをMenloに
@@ -247,6 +248,7 @@
   (add-to-list 'package-archives
                '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   ;; インストールしたパッケージにロードパスを通して読み込む
   (package-initialize))
 
@@ -355,33 +357,11 @@
 ;; ElScreenのプレフィックスキーを変更する（初期値はC-z）
 ;; (setq elscreen-prefix-key (kbd "C-t"))
 (when (require 'elscreen nil t)
+  (elscreen-start) 
   ;; C-z C-zをタイプした場合にデフォルトのC-zを利用する
   (if window-system
       (define-key elscreen-map (kbd "C-z") 'iconify-or-deiconify-frame)
     (define-key elscreen-map (kbd "C-z") 'suspend-emacs)))
-
-
-;; howmメモ保存の場所
-(setq howm-directory (concat user-emacs-directory "howm"))
-;; howm-menuの言語を日本語に
-(setq howm-menu-lang 'ja)
-;; howmメモを1日1ファイルにする
-; (setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
-;; howm-modeを読み込む
-(when (require 'howm-mode nil t)
-  ;; C-c,,でhowm-menuを起動
-  (define-key global-map (kbd "C-c ,,") 'howm-menu))
-;; howmメモを保存と同時に閉じる
-(defun howm-save-buffer-and-kill ()
-  "howmメモを保存と同時に閉じます。"
-  (interactive)
-  (when (and (buffer-file-name)
-             (string-match "\\.howm" (buffer-file-name)))
-    (save-buffer)
-    (kill-buffer nil)))
-
-;; C-c C-cでメモの保存と同時にバッファを閉じる
-(define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
 
 
 ;; cua-modeの設定
@@ -394,7 +374,7 @@
 ;; HTML5
 (eval-after-load "rng-loc"
   '(add-to-list 'rng-schema-locating-files "~/.emacs.d/public_repos/html5-el/schemas.xml"))
-(require 'whattf-dt)
+;; (require 'whattf-dt)
 
 ;; </を入力すると自動的にタグを閉じる
 (setq nxml-slash-auto-complete-flag t)
@@ -636,6 +616,10 @@ Use CREATE-TEMP-F for creating temp copy."
 (add-to-list 'flymake-err-line-patterns
              '("\\(.*\\):(\\([0-9]+\\)): \\(.*\\)" 1 2 nil 3))
 
+;; flymake css
+(add-to-list 'load-path "~/.emacs.d/elpa/flymake-css")
+(require 'flymake-css)
+
 ;; Python用Flymakeの設定
 ;; (install-elisp "https://raw.github.com/seanfisk/emacs/sean/src/flymake-python.el")
 (when (require 'flymake-python nil t)
@@ -719,8 +703,8 @@ Use CREATE-TEMP-F for creating temp copy."
         (t nil))) ; どちらもオフであれば何もしない
 
 ;; C-c tにtoggle-emacs-cakeを割り当て
-(define-key cake-key-map (kbd "C-c t") 'toggle-emacs-cake)
-(define-key cake2-key-map (kbd "C-c t") 'toggle-emacs-cake)
+;; (define-key cake-key-map (kbd "C-c t") 'toggle-emacs-cake)
+;; (define-key cake2-key-map (kbd "C-c t") 'toggle-emacs-cake)
 
 ;; auto-complete, ac-cake, ac-cake2の読み込みをチェック
 (when (and (require 'auto-complete nil t)
@@ -736,7 +720,7 @@ Use CREATE-TEMP-F for creating temp copy."
 
 
 
-(require 'emoji)
+;; (require 'emoji)
 
 ;; ediffコントロールパネルを別フレームにしない
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -885,6 +869,10 @@ Use CREATE-TEMP-F for creating temp copy."
 ;; 行番号表示
 ;; (global-linum-mode t)
 
+;; markdown対応
+(setq markdown-command "multimarkdown")
+(setq markdown-open-command "marked2")
+
 ;; https://github.com/emacs-jp/init-loader
-(require "init-loader")
+(require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")

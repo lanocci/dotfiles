@@ -1,0 +1,2 @@
+
+((digest . "98bec945281d8ec4642bd7a3e74752db") (undo-list nil (246 . 260) nil (242 . 246) nil ("welcome#index'" . 242) ((marker) . -14) (t 22510 31773 0 0) nil (" " . 236) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) nil ("#" . 236) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) ((marker* . 236) . 1) (t 22510 30128 0 0) nil undo-tree-canary))
