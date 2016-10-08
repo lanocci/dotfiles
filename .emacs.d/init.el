@@ -1,3 +1,6 @@
+;; reference: Emacs実践入門～思考を直感的にコード化し、開発を加速する (WEB+DB PRESS plus)
+
+
 (require 'cl)
 
 ;; スタートアップメッセージを非表示
@@ -222,25 +225,13 @@
 (add-hook 'emacs-lisp-mode-hook 'elisp-mode-hooks)
 
 
-
-;; auto-installの設定
-(when (require 'auto-install nil t)	; ←1●
-  ;; 2●インストールディレクトリを設定する 初期値は ~/.emacs.d/auto-install/
-  (setq auto-install-directory "~/.emacs.d/elisp/")
-  ;; EmacsWikiに登録されているelisp の名前を取得する
-  (auto-install-update-emacswiki-package-name t)
-  ;; 必要であればプロキシの設定を行う
-  ;; (setq url-proxy-services '(("http" . "localhost:8339")))
-  ;; 3●install-elisp の関数を利用可能にする
-  (auto-install-compatibility-setup)) ; 4●
-
 ;; (install-elisp "http://www.emacswiki.org/emacs/download/redo+.el")
 (when (require 'redo+ nil t)
   ;; C-' にリドゥを割り当てる
   (global-set-key (kbd "C-'") 'redo)
   ;; 日本語キーボードの場合C-. などがよいかも
   ;; (global-set-key (kbd "C-.") 'redo)
-  ) ; ←ここでC-x C-eで設定反映
+  ) 
 
 ;; package.elの設定
 (when (require 'package nil t)
@@ -281,7 +272,6 @@
   (when (require 'anything-complete nil t)
     ;; lispシンボルの補完候補の再検索時間
     (anything-lisp-complete-symbol-set-timer 150))
-
   (require 'anything-show-completion nil t)
 
   (when (require 'auto-install nil t)
@@ -870,6 +860,7 @@ Use CREATE-TEMP-F for creating temp copy."
 ;; markdown対応
 (setq markdown-command "multimarkdown")
 (setq markdown-open-command "marked2")
+
 
 ;; https://github.com/emacs-jp/init-loader
 (require 'init-loader)
