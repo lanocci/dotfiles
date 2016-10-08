@@ -1,0 +1,7 @@
+.emacs.d/undohist/*
+.emacs.d/auto-save-list/*
+.emacs.d/recentf/*
+.emacs.d/backups/*
+.emacs.d/recentf/*
+.emacs.d/elpa/*
+*#*

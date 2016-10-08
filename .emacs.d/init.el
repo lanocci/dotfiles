@@ -128,7 +128,7 @@
    nil 'japanese-jisx0208
    ;; 英語名の場合
    ;; (font-spec :family "Hiragino Mincho Pro"))
-   (font-spec :family "ヒラギノ明朝 Pro"))
+   (font-spec :family "ヒラギノゴシック Pro"))
   ;; ひらがなとカタカナをモトヤシーダに
   ;; U+3000-303F	CJKの記号および句読点
   ;; U+3040-309F	ひらがな
@@ -139,7 +139,7 @@
   ;; フォントの横幅を調節する
   (setq face-font-rescale-alist
         '((".*Menlo.*" . 1.0)
-          (".*Hiragino_Mincho_Pro.*" . 1.2)
+          (".*Hiragino_Gothic_Pro.*" . 1.2)
           (".*nfmotoyacedar-bold.*" . 1.2)
           (".*nfmotoyacedar-medium.*" . 1.2)
           ("-cdac$" . 1.3))))
@@ -367,7 +367,7 @@
 ;; cua-modeの設定
 (cua-mode t) ; cua-modeをオン
 (setq cua-enable-cua-keys nil) ; CUAキーバインドを無効にする
-
+(global-set-key (kbd "M-RET") 'cua-set-rectangle-mark)
 
 ;; HTML編集のデフォルトモードをnxml-modeにする
 (add-to-list 'auto-mode-alist '("\\.[sx]?html?\\(\\.[a-zA-Z_]+\\)?\\'" . nxml-mode))
@@ -860,12 +860,10 @@ Use CREATE-TEMP-F for creating temp copy."
 
 (setq dired-dwim-target t)
 
-;; set C-h as backspace
-(keyboard-translate ?\C-h ?\C-?)
-
 ;; set "C-x ?" as help command
 (global-set-key (kbd "C-x ?") 'help-command)
-
+;; set C-h as backspace
+(global-set-key (kbd "C-h") 'delete-backward-char)
 ;; 行番号表示
 ;; (global-linum-mode t)
 
