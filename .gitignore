@@ -3,6 +3,8 @@
 .emacs.d/recentf/*
 .emacs.d/backups/*
 .emacs.d/recentf/*
-.emacs.d/elpa/*
+.emacs.d/elpa/.
 .emacs.d/public_repos/*
 *#*
+.emacs.d/el-get/.
+.emacs.d/ac-comphist.dat
