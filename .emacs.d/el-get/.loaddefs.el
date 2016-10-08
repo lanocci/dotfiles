@@ -1226,6 +1226,26 @@ Display a list of packages.
 
 ;;;***
 
+;;;### (autoloads nil "markdown-mode/markdown-mode" "../../../../.emacs.d/el-get/markdown-mode/markdown-mode.el"
+;;;;;;  "dfd84c7ac53c80fa404862e28eb850d3")
+;;; Generated autoloads from ../../../../.emacs.d/el-get/markdown-mode/markdown-mode.el
+
+(autoload 'markdown-mode "markdown-mode/markdown-mode" "\
+Major mode for editing Markdown files.
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode) t)
+
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode) t)
+
+(autoload 'gfm-mode "markdown-mode/markdown-mode" "\
+Major mode for editing GitHub Flavored Markdown files.
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads nil "undo-tree/undo-tree" "undo-tree/undo-tree.el"
 ;;;;;;  (22521 2290 0 0))
 ;;; Generated autoloads from undo-tree/undo-tree.el
@@ -1273,7 +1293,8 @@ See `undo-tree-mode' for more information on Undo-Tree mode.
 
 ;;;***
 
-;;;### (autoloads nil nil ("anything-c-moccur/anything-c-moccur.el"
+;;;### (autoloads nil nil ("../../../../.emacs.d/el-get/markdown-mode/markdown-mode.el"
+;;;;;;  "../../../../.emacs.d/el-get/undohist/undohist.el" "anything-c-moccur/anything-c-moccur.el"
 ;;;;;;  "anything/90anything-complete.el" "anything/contrib/anything-grep.el"
 ;;;;;;  "anything/contrib/anything-ipa.el" "anything/contrib/anything-menu.el"
 ;;;;;;  "anything/contrib/anything-migemo.el" "anything/contrib/anything-multi-sources.el"
@@ -1284,7 +1305,7 @@ See `undo-tree-mode' for more information on Undo-Tree mode.
 ;;;;;;  "el-get/el-get-core.el" "el-get/el-get-custom.el" "el-get/el-get-dependencies.el"
 ;;;;;;  "el-get/el-get-install.el" "el-get/el-get-methods.el" "el-get/el-get-notify.el"
 ;;;;;;  "el-get/el-get-recipes.el" "el-get/el-get-status.el") (22521
-;;;;;;  2352 7540 0))
+;;;;;;  3387 407484 0))
 
 ;;;***
 

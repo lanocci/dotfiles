@@ -23,13 +23,13 @@
     (eval-print-last-sexp)))
 
 ;; いつも使うパッケージがなければ先にインストール
-(el-get-bundle undo-hist)
+(el-get-bundle undohist)
 (el-get-bundle undo-tree)
-(el-get-bundle redo+)
 (el-get-bundle anything)
 (el-get-bundle anything-c-moccur)
 (el-get-bundle elscreen)
-
+(el-get-bundle markdown-mode)
+(el-get-bundle eruby-mode)
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)

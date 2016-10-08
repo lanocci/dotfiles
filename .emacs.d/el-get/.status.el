@@ -33,6 +33,11 @@
 		  (require 'el-get))))
  (elscreen status "installed" recipe
 	   (:name elscreen :after nil :description "Screen Manager for Emacsen" :website "https://github.com/emacs-jp/elscreen" :type github :pkgname "emacs-jp/elscreen"))
+ (eruby-mode status "required" recipe nil)
+ (markdown-mode status "installed" recipe
+		(:name markdown-mode :after nil :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type github :pkgname "jrblevin/markdown-mode" :prepare
+		       (add-to-list 'auto-mode-alist
+				    '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
  (package status "installed" recipe
 	  (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "https://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el" :features package :post-init
 		 (progn
@@ -76,4 +81,6 @@
  (redo+ status "required" recipe nil)
  (undo-hist status "required" recipe nil)
  (undo-tree status "installed" recipe
-	    (:name undo-tree :after nil :description "Treat undo history as a tree" :website "http://www.dr-qubit.org/emacs.php" :type git :url "http://www.dr-qubit.org/git/undo-tree.git/")))
+	    (:name undo-tree :after nil :description "Treat undo history as a tree" :website "http://www.dr-qubit.org/emacs.php" :type git :url "http://www.dr-qubit.org/git/undo-tree.git/"))
+ (undohist status "installed" recipe
+	   (:name undohist :after nil :type github :pkgname "m2ym/undohist-el" :description "Record and recover undo history" :website "http://d.hatena.ne.jp/m2ym/20090707/1246933894")))
