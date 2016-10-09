@@ -13,7 +13,37 @@
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
-;; el-getがインストールされていれば有効化、そうでなければgithubからインストール(http://tarao.hatenablog.com/entry/20150221/1424518030)
+;; package.elの設定
+(when (require 'package nil t)
+  ;; パッケージリポジトリにMarmaladeと開発者運営のELPAを追加
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  ;; インストールしたパッケージにロードパスを通して読み込む
+  (package-initialize))
+
+;;; いつも使うパッケージがなければ先にインストール
+;;; cf. http://qiita.com/hmikisato/items/043355e1e2dd7ad8cd43
+
+;; インストールするパッケージのリスト
+(defvar my/packages
+  '(
+    undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm
+   ))
+
+;; リストのパッケージをインストール
+(let ((not-installed
+       (cl-loop for x in my/packages
+                when (not (package-installed-p x))
+                collect x)))
+  (when not-installed
+    (package-refresh-contents)
+    (dolist (pkg not-installed)
+      (package-install pkg))))
+
+;; el-getがインストールされていれば有効化、そうでなければgithubからインストール
+;; (http://tarao.hatenablog.com/entry/20150221/1424518030)
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -22,14 +52,13 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
-;; いつも使うパッケージがなければ先にインストール
-(el-get-bundle undohist)
-(el-get-bundle undo-tree)
-(el-get-bundle anything)
-(el-get-bundle anything-c-moccur)
-(el-get-bundle elscreen)
-(el-get-bundle markdown-mode)
-(el-get-bundle eruby-mode)
+;; elgetでリストの内容をインストール
+(defvar my/el-get-packages
+  '(
+    howm
+   ))
+(el-get 'sync my/el-get-packages)
+
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -253,16 +282,6 @@
   ;; 日本語キーボードの場合C-. などがよいかも
   ;; (global-set-key (kbd "C-.") 'redo)
   ) 
-
-;; package.elの設定
-(when (require 'package nil t)
-  ;; パッケージリポジトリにMarmaladeと開発者運営のELPAを追加
-  (add-to-list 'package-archives
-               '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-  ;; インストールしたパッケージにロードパスを通して読み込む
-  (package-initialize))
 
 
 ;; (auto-install-batch "anything")
