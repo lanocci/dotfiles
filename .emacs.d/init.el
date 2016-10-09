@@ -55,7 +55,7 @@
 ;; elgetでリストの内容をインストール
 (defvar my/el-get-packages
   '(
-    howm
+    howm egg init-loader
    ))
 (el-get 'sync my/el-get-packages)
 
