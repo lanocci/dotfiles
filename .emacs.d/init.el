@@ -1,6 +1,5 @@
 ;; reference: Emacs実践入門～思考を直感的にコード化し、開発を加速する (WEB+DB PRESS plus)
 
-
 (require 'cl)
 
 ;; スタートアップメッセージを非表示
@@ -29,7 +28,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css
+    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido
    ))
 
 ;; リストのパッケージをインストール
@@ -55,7 +54,7 @@
 ;; elgetでリストの内容をインストール
 (defvar my/el-get-packages
   '(
-    howm egg init-loader 
+    howm egg init-loader gtags
    ))
 (el-get 'sync my/el-get-packages)
 
@@ -285,57 +284,57 @@
 
 
 ;; (auto-install-batch "anything")
-(when (require 'anything nil t)
-  (setq
-   ;; 候補を表示するまでの時間。デフォルトは0.5
-   anything-idle-delay 0.3
-   ;; タイプして再描写するまでの時間。デフォルトは0.1
-   anything-input-idle-delay 0.2
-   ;; 候補の最大表示数。デフォルトは50
-   anything-candidate-number-limit 100
-   ;; 候補が多いときに体感速度を早くする
-   anything-quick-update t
-   ;; 候補選択ショートカットをアルファベットに
-   anything-enable-shortcuts 'alphabet)
-
-  (when (require 'anything-config nil t)
-    ;; root権限でアクションを実行するときのコマンド
-    ;; デフォルトは"su"
-    (setq anything-su-or-sudo "sudo"))
-
-  (require 'anything-match-plugin nil t)
-
-  (when (and (executable-find "cmigemo")
-             (require 'migemo nil t))
-    (require 'anything-migemo nil t))
-
-  (when (require 'anything-complete nil t)
-    ;; lispシンボルの補完候補の再検索時間
-    (anything-lisp-complete-symbol-set-timer 150))
-  (require 'anything-show-completion nil t)
-
-  (when (require 'auto-install nil t)
-    (require 'anything-auto-install nil t))
-
-  (when (require 'descbinds-anything nil t)
-    ;; describe-bindingsをAnythingに置き換える
-    (descbinds-anything-install)))
-
-(define-key global-map (kbd "M-y") 'anything-show-kill-ring)
-
-(when (require 'anything-c-moccur nil t)
-  (setq
-   ;; anything-c-moccur用 `anything-idle-delay'
-   anything-c-moccur-anything-idle-delay 0.1
-   ;; バッファの情報をハイライトする
-   anything-c-moccur-higligt-info-line-flag t
-   ;; 現在選択中の候補の位置をほかのwindowに表示する
-   anything-c-moccur-enable-auto-look-flag t
-   ;; 起動時にポイントの位置の単語を初期パターンにする
-   anything-c-moccur-enable-initial-pattern t)
-  ;; C-M-oにanything-c-moccur-occur-by-moccurを割り当てる
-  (global-set-key (kbd "C-M-o") 'anything-c-moccur-occur-by-moccur))
-
+; (when (require 'anything nil t)
+;   (setq
+;   ;; 候補を表示するまでの時間。デフォルトは0.5
+;   anything-idle-delay 0.3
+;   ;; タイプして再描写するまでの時間。デフォルトは0.1
+;   anything-input-idle-delay 0.2
+;   ;; 候補の最大表示数。デフォルトは50
+;   anything-candidate-number-limit 100
+;   ;; 候補が多いときに体感速度を早くする
+;   anything-quick-update t
+;   ;; 候補選択ショートカットをアルファベットに
+;   anything-enable-shortcuts 'alphabet)
+;
+;  (when (require 'anything-config nil t)
+;    ;; root権限でアクションを実行するときのコマンド
+;    ;; デフォルトは"su"
+;    (setq anything-su-or-sudo "sudo"))
+;
+;  (require 'anything-match-plugin nil t)
+;
+;  (when (and (executable-find "cmigemo")
+;             (require 'migemo nil t))
+;    (require 'anything-migemo nil t))
+;
+;  (when (require 'anything-complete nil t)
+;    ;; lispシンボルの補完候補の再検索時間
+;    (anything-lisp-complete-symbol-set-timer 150))
+;  (require 'anything-show-completion nil t)
+;
+;  (when (require 'auto-install nil t)
+;    (require 'anything-auto-install nil t))
+;
+;  (when (require 'descbinds-anything nil t)
+;    ;; describe-bindingsをAnythingに置き換える
+;    (descbinds-anything-install)))
+;
+;(define-key global-map (kbd "M-y") 'anything-show-kill-ring)
+;
+;(when (require 'anything-c-moccur nil t)
+;  (setq
+;   ;; anything-c-moccur用 `anything-idle-delay'
+;   anything-c-moccur-anything-idle-delay 0.1
+;   ;; バッファの情報をハイライトする
+;   anything-c-moccur-higligt-info-line-flag t
+;   ;; 現在選択中の候補の位置をほかのwindowに表示する
+;   anything-c-moccur-enable-auto-look-flag t
+;   ;; 起動時にポイントの位置の単語を初期パターンにする
+;   anything-c-moccur-enable-initial-pattern t)
+;  ;; C-M-oにanything-c-moccur-occur-by-moccurを割り当てる
+;  (global-set-key (kbd "C-M-o") 'anything-c-moccur-occur-by-moccur))
+;
 (when (require 'auto-complete-config nil t)
   (add-to-list 'ac-dictionary-directories 
     "~/.emacs.d/elisp/ac-dict")
@@ -691,37 +690,76 @@ Use CREATE-TEMP-F for creating temp copy."
 ;; etags互換タグを利用する場合はコメントを外す
 ;; (setq ctags-command "ctags -e -R ")
 ;; anything-exuberant-ctags.elを利用しない場合はコメントアウトする
-(setq ctags-command "ctags -R --fields=\"+afikKlmnsSzt\" ")
-(global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
+; (setq ctags-command "ctags -R --fields=\"+afikKlmnsSzt\" ")
+; (global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
 
 ;; AnythingからTAGSを利用しやすくするコマンド作成
-(when (and (require 'anything-exuberant-ctags nil t)
-           (require 'anything-gtags nil t))
-  ;; anything-for-tags用のソースを定義
-  (setq anything-for-tags
-        (list anything-c-source-imenu
-              anything-c-source-gtags-select
-              ;; etagsを利用する場合はコメントを外す
-              ;; anything-c-source-etags-select
-              anything-c-source-exuberant-ctags-select
-              ))
+; (when (and (require 'anything-exuberant-ctags nil t)
+;            (require 'anything-gtags nil t))
+;   ;; anything-for-tags用のソースを定義
+;   (setq anything-for-tags
+;         (list anything-c-source-imenu
+;               anything-c-source-gtags-select
+;               ;; etagsを利用する場合はコメントを外す
+;               ;; anything-c-source-etags-select
+;               anything-c-source-exuberant-ctags-select
+;               ))
+; 
+;   ;; anything-for-tagsコマンドを作成
+;   (defun anything-for-tags ()
+;     "Preconfigured `anything' for anything-for-tags."
+;     (interactive)
+;     (anything anything-for-tags
+;               (thing-at-point 'symbol)
+;               nil nil nil "*anything for tags*"))
+;   
+;   ;; M-tにanything-for-currentを割り当て
+;   (define-key global-map (kbd "M-t") 'anything-for-tags))
 
-  ;; anything-for-tagsコマンドを作成
-  (defun anything-for-tags ()
-    "Preconfigured `anything' for anything-for-tags."
+
+;; http://blog.willnet.in/entry/20090110/1231595231
+;; http://fnwiya.hatenablog.com/entry/2015/10/17/211547
+(use-package ido
+  :bind
+  (("C-x C-r" . ido-recentf-open)
+   ("C-x C-f" . ido-find-file)
+   ("C-x C-d" . ido-dired)
+   ("C-x b" . ido-switch-buffer)
+   ("C-x C-b" . ido-switch-buffer)
+   ("M-x" . smex))
+  :init
+  (defun ido-recentf-open ()
+    "Use `ido-completing-read' to \\[find-file] a recent file"
     (interactive)
-    (anything anything-for-tags
-              (thing-at-point 'symbol)
-              nil nil nil "*anything for tags*"))
-  
-  ;; M-tにanything-for-currentを割り当て
-  (define-key global-map (kbd "M-t") 'anything-for-tags))
+    (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+        (message "Opening file...")
+      (message "Aborting")))
+  :config
+  (ido-mode 1)
+  (ido-ubiquitous-mode 1)
+  (setq ido-enable-flex-matching t)
+  (setq ido-save-directory-list-file "~/.emacs.d/cache/ido.last")
+  (ido-vertical-mode 1)
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+  (setq ido-max-window-height 0.75)
+)
+(use-package smex
+  :bind
+  (("M-x" . smex))
+  :init
+  (setq smex-save-file "~/.emacs.d/cache/.smex-items")
+  :config
+  (smex-initialize)
+  )
 
-
+;;; Rails Development
 
 ;;; Rinari
-(when (require 'rhtml-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.rhtml\\'" . rhtml-mode)))
+(require 'rinari)
+ (when (require 'rhtml-mode nil t)
+   (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . rhtml-mode)))
+
+;; projectile 
 
 ;; CakePHP 1系統のemacs-cake
 (when (require 'cake nil t)
@@ -780,7 +818,7 @@ Use CREATE-TEMP-F for creating temp copy."
 
 
 
-;;; P215-216 Subversionフロントエンド psvn
+;;; Subversionフロントエンド psvn
 (when (executable-find "svn")
   (setq svn-status-verbose nil)
   (autoload 'svn-status "psvn" "Run `svn status'." t))
@@ -788,7 +826,6 @@ Use CREATE-TEMP-F for creating temp copy."
 ;; GitフロントエンドEggの設定
 (when (executable-find "git")
   (require 'egg nil t))
-
 
 
 ;; multi-termの設定
@@ -804,7 +841,7 @@ Use CREATE-TEMP-F for creating temp copy."
 
 
 
-;;; P226-228 Emacs版manビューア（WoMan）の利用
+;;; Emacs版manビューア（WoMan）の利用
 ;; キャッシュを作成
 (setq woman-cache-filename "~/.emacs.d/.wmncach.el")
 ;; manパスを設定
@@ -813,36 +850,33 @@ Use CREATE-TEMP-F for creating temp copy."
                       "/usr/local/share/man/ja"))
 
 ;; anything-for-document用のソースを定義
-(setq anything-for-document-sources
-      (list anything-c-source-man-pages
-            anything-c-source-info-cl
-            anything-c-source-info-pages
-            anything-c-source-info-elisp
-            anything-c-source-apropos-emacs-commands
-            anything-c-source-apropos-emacs-functions
-            anything-c-source-apropos-emacs-variables))
+; (setq anything-for-document-sources
+;       (list anything-c-source-man-pages
+;             anything-c-source-info-cl
+;             anything-c-source-info-pages
+;             anything-c-source-info-elisp
+;             anything-c-source-apropos-emacs-commands
+;             anything-c-source-apropos-emacs-functions
+;             anything-c-source-apropos-emacs-variables))
 
 ;; anything-for-documentコマンドを作成
-(defun anything-for-document ()
-  "Preconfigured `anything' for anything-for-document."
-  (interactive)
-  (anything anything-for-document-sources
-            (thing-at-point 'symbol) nil nil nil
-            "*anything for document*"))
+; (defun anything-for-document ()
+;   "Preconfigured `anything' for anything-for-document."
+;   (interactive)
+;   (anything anything-for-document-sources
+;             (thing-at-point 'symbol) nil nil nil
+;             "*anything for document*"))
 
 ;; Command+dにanything-for-documentを割り当て
-(define-key global-map (kbd "s-d") 'anything-for-document)
-
-
-
+; (define-key global-map (kbd "s-d") 'anything-for-document)
 
 ;;; カーソル位置のファイルパスやアドレスを "C-x C-f" で開く
-(ffap-bindings)
+;; (ffap-bindings)
 
 
 ;; Mac の Command + f と C-x b で anything-for-files
-(define-key global-map (kbd "s-f") 'anything-for-files)
-(define-key global-map (kbd "C-x b") 'anything-for-files)
+; (define-key global-map (kbd "s-f") 'anything-for-files)
+; (define-key global-map (kbd "C-x b") 'anything-for-files)
 ;; M-k でカレントバッファを閉じる
 (define-key global-map (kbd "M-k") 'kill-this-buffer)
 ;; Mac の command + 3 でウィンドウを左右に分割
