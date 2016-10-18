@@ -54,7 +54,7 @@
 ;; elgetでリストの内容をインストール
 (defvar my/el-get-packages
   '(
-    howm egg init-loader gtags
+    howm egg init-loader gtags zencoding-mode
    ))
 (el-get 'sync my/el-get-packages)
 
@@ -758,6 +758,8 @@ Use CREATE-TEMP-F for creating temp copy."
 (require 'rinari)
  (when (require 'rhtml-mode nil t)
    (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . rhtml-mode)))
+(add-hook 'rhtml-mode-hook
+    (lambda () (rinari-launch)))
 
 ;; projectile 
 
@@ -949,10 +951,25 @@ Use CREATE-TEMP-F for creating temp copy."
 ;; (global-linum-mode t)
 
 ;; markdown対応
-(setq markdown-command "multimarkdown")
-(setq markdown-open-command "marked2")
+;; markdownのコマンドのパス追加
+
+;; windows
+(when (eq window-system 'w32)
+  (setq markdown-command "perl C:/strawberry/perl/bin/Markdown.pl"))
+
+;; macOS
+(when (eq window-system 'darwin)
+  (setq markdown-command "multimarkdown")
+  (setq markdown-open-command "marked2"))
 
 
 ;; https://github.com/emacs-jp/init-loader
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")
+
+;; zencoding-mode
+;; http://qiita.com/fnobi/items/10bb1185ce0c62efc5de
+;; http://qiita.com/fnobi/items/bb3b700b1fbdd1a00196
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode)
+(define-key zencoding-mode-keymap (kbd "C-i") 'zencoding-expand-line)
