@@ -1,4 +1,4 @@
-; reference: Emacs実践入門～思考を直感的にコード化し、開発を加速する (WEB+DB PRESS plus)
+;; reference: Emacs実践入門～思考を直感的にコード化し、開発を加速する (WEB+DB PRESS plus)
 
 (require 'cl)
 
@@ -28,7 +28,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml
+    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido
    ))
 
 ;; リストのパッケージをインストール
@@ -54,7 +54,7 @@
 ;; elgetでリストの内容をインストール
 (defvar my/el-get-packages
   '(
-    howm egg init-loader gtags emmet-mode
+    howm egg init-loader gtags zencoding-mode
    ))
 (el-get 'sync my/el-get-packages)
 
@@ -533,7 +533,7 @@
 
 ;; ruby-mode-hook用の関数を定義
 (defun ruby-mode-hooks ()
-  (inf-ruby-keys t)
+  (inf-ruby-keys)
   (ruby-electric-mode t)
   (ruby-block-mode t))
 ;; ruby-mode-hookに追加
@@ -756,7 +756,7 @@ Use CREATE-TEMP-F for creating temp copy."
 
 ;;; Rinari
 (require 'rinari)
-(when (require 'rhtml-mode nil t)
+ (when (require 'rhtml-mode nil t)
    (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . rhtml-mode)))
 (add-hook 'rhtml-mode-hook
     (lambda () (rinari-launch)))
@@ -958,8 +958,7 @@ Use CREATE-TEMP-F for creating temp copy."
   (setq markdown-command "perl C:/strawberry/perl/bin/Markdown.pl"))
 
 ;; macOS
-;;(when (eq window-system 'darwin)
-(when (eq window-system 'ns)
+(when (eq window-system 'darwin)
   (setq markdown-command "multimarkdown")
   (setq markdown-open-command "marked2"))
 
@@ -968,28 +967,9 @@ Use CREATE-TEMP-F for creating temp copy."
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")
 
-;; emmet-mode
-;; http://qiita.com/ironsand/items/55f2ced218949efbb1fb
-(require 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; マークアップ言語全部で使う
-(add-hook 'nXML-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode) ;; CSSにも使う
-(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;; indent はスペース2個
-(eval-after-load "emmet-mode"
-  '(define-key emmet-mode-keymap (kbd "C-j") nil)) ;; C-j は newline のままにしておく
-(keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
-(define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
-
-;;howm
-(setq howm-directory (concat user-emacs-directory "howm"))
-(setq howm-menu-lang 'ja)
-(setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
-(when (require 'howm-mode nil t)
-  (define-key global-map (kbd "C-c ,,") 'howm-menu))
-(defun howm-save-buffer-and-kill ()
-  (interactive)
-  (when (and (buffer-file-name)
-             (string-match "\\.howm" (buffer-file-name)))
-    (save-buffer)
-    (kill-buffer nill)))
-(define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
+;; zencoding-mode
+;; http://qiita.com/fnobi/items/10bb1185ce0c62efc5de
+;; http://qiita.com/fnobi/items/bb3b700b1fbdd1a00196
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode)
+(define-key zencoding-mode-keymap (kbd "C-i") 'zencoding-expand-line)

@@ -1,7 +1,0 @@
-= 
-[2016-11-04 20:07] >>> ~/Workspaces/sample_app/app/views/users/index.html.erb
-- section 9.3.5
-  - Railsは@usersをUserオブジェクトのリストであると推測します。
-  - さらに、ユーザーのコレクションを与えて呼び出すと、Railsは自動的にユーザーのコレクションを列挙し、
-  - それぞれのユーザーを_user.html.erbパーシャルで出力します (訳注: each doとendで囲む必要がなくなります)。
-  - これにより、リスト9.48のコードは極めてコンパクトになります。
