@@ -1,0 +1,40 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/KUrano/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/KUrano/projects/dotfiles/.emacs.d/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "init.el"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/KUrano/projects/dotfiles/.emacs.d/" (22523 29174 0 0) "undohist/" "public_repos/" "init.el~" "init.el" "ido.last" "elpa/" "elisp/" "el-get/" "conf/" "backups/" "auto-save-list/" "ac-comphist.dat" "../" "./")
+
+ ("/Users/KUrano/projects/dotfiles/" (22521 57590 0 0) "README.md" ".gitignore" ".git/" ".emacs.d/" "../" "./")
+
+ ("/Users/KUrano/.emacs.d/" (22523 28724 0 0) "undohist/" "public_repos/" "init.el~" "init.el" "elpa/" "elisp/" "el-get/" "conf/" "backups/" "auto-save-list/" "ac-comphist.dat" "../" "./")
+
+ ("/Users/KUrano/" (22520 16954 0 0) "˜/" "Workspaces/" "VirtualBox VMs/" "ruby_ex/" "Rakefile" "Public/" "projects/" "prev.png" "Pictures/" "org/" "next.png" "Music/" "Movies/" "loading.gif" "lightbox.min.map" "lightbox.min.js" "lightbox.js" "lightbox-plus-jquery.min.map" "lightbox-plus-jquery.min.js" "lightbox-plus-jquery.js" "Library/" "lib/" "KUrano.xcodeproj/" "jquery.slides.min.js" "HariboteOS/" "Emacs-24.4-universal.dmg" "emacs-24.4-mac-5.0/" "emacs-24.4/" "Dropbox/" "Downloads/" "Documents/" "Desktop/" "Creative Cloud Files/" "close.png" "bootstrap.min.js" "Applications/" ".vscode/" ".viminfo" ".vim/" ".vagrant.d/" ".Trash/" ".todo/" ".subversion/" ".ssh/" ".sqlite_history" ".sh_history" ".rspec" ".rnd" ".rbenv/" ".oracle_jre_usage/" ".npm/" ".netrc" ".local/" ".kube/" ".irbrc" ".hgignore_global" ".heroku/" ".gitignore_global" ".gitconfig" ".gem/" ".flexlmrc" ".emacs.d/" ".DS_Store" ".dropbox/" ".docker/" ".cups/" ".config/" ".codeintel/" ".CFUserTextEncoding" ".cache/" ".bundle/" ".bashrc" ".bash_sessions/" ".bash_profile~" ".bash_profile.pysave" ".bash_profile" ".bash_history" ".android/" ".489454.padl" "#emacs_practice#" "../" "./")
+
+ ("/Users/KUrano/Workspaces/" (22518 19848 0 0) "˜/" "yorokko_beer.md" "Workspaces.xcodeproj/" "vm/" "toy_app/" "todo-manager/" "tmp/" "sublime_usage/" "sample_app/" "RubyMotion/" "ruby_on_rails_application_programing/" "ruby/" "reveal_js/" "ReadingMaterial/" "railbook.sublime-workspace" "railbook.sublime-project" "railbook/" "other/" "naoko_art_app/" "naoko_art/" "MyPlayground.playground/" "MyFirstApp/" "MyApp/" "MacRuby/" "LifeHack/" "lib/" "learning/" "javascript/" "java/" "iOSOpenCV/" "HelloWorld/" "hello_app/" "HeadFirstRails/" "ExPlayground_1.playground/" "exPlayground.playground/" "edge/" "cvCamTest/" "ComputerScience/" "CoffeeBrewing/" "cocoaOpenCV/" "CLang/" "CentOS-7-x86_64-Minimal-1511.iso" "awesome_events/" ".DS_Store" "../" "./")
+
+ ("/Users/KUrano/Workspaces/sample_app/" (22521 54979 0 0) "vendor/" "tmp/" "test/" "README.md" "Rakefile" "public/" "memo.md" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "db/" "configuration_manual.md" "config.ru" "config/" "bin/" "app/" ".ruby-version" ".gitignore" ".git/" ".bundle/" "../" "./")
+
+ ("/Users/KUrano/Workspaces/sample_app/app/" (22511 9020 0 0) "views/" "models/" "mailers/" "helpers/" "controllers/" "assets/" "../" "./")
+
+ ("/Users/KUrano/Workspaces/sample_app/app/views/" (22521 54979 0 0) "users/" "static_pages/" "layouts/" "../" "./")
+
+ ("/Users/KUrano/Workspaces/sample_app/app/views/layouts/" (22521 54979 0 0) "application.html.erb" "_shim.html.erb" "_header.html.erb" "_footer.html.erb" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

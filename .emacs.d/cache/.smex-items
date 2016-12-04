@@ -1,0 +1,24 @@
+
+;; ----- smex-history -----
+(
+ make-directory
+ rinari-launch
+ package-utils-upgrade-by-name
+ package-install
+ el-get-update
+ el-get-install
+ yaml-mode
+)
+
+;; ----- smex-data -----
+(
+ (rinari-launch . 3)
+ (rhtml-mode . 1)
+ (list-packages . 4)
+ (el-get-install . 3)
+ (yaml-mode . 1)
+ (el-get-update . 1)
+ (package-install . 1)
+ (package-utils-upgrade-by-name . 1)
+ (make-directory . 1)
+)

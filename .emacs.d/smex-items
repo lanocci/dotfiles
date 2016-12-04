@@ -1,0 +1,23 @@
+
+;; ----- smex-history -----
+(
+ list-packages
+ ido-find-file
+ ido-dired
+ package-utils-upgrade-all
+ package-install
+ ido-find-file-in-dir
+ ido-everywhere
+)
+
+;; ----- smex-data -----
+(
+ (ido-mode . 2)
+ (ido-everywhere . 2)
+ (ido-find-file-in-dir . 1)
+ (package-install . 1)
+ (package-utils-upgrade-all . 1)
+ (ido-dired . 1)
+ (ido-find-file . 1)
+ (list-packages . 1)
+)
