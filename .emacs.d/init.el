@@ -2,6 +2,24 @@
 
 (require 'cl)
 
+
+;; パスを通す(http://moonstruckdrops.github.io/blog/2013/03/24/markdown-mode/)
+(dolist (dir (list
+              "/sbin"
+              "/usr/sbin"
+              "/bin"
+              "/usr/bin"
+              "/opt/local/bin"
+              "/sw/bin"
+              "/usr/local/bin"
+              (expand-file-name "~/bin")
+              (expand-file-name "~/.emacs.d/bin")
+              ))
+ (when (and (file-exists-p dir) (not (member dir exec-path)))
+   (setenv "PATH" (concat dir ":" (getenv "PATH")))
+   (setq exec-path (append (list dir) exec-path))))
+
+
 ;; スタートアップメッセージを非表示
 (setq inhibit-startup-screen t)
 
@@ -966,7 +984,14 @@ Use CREATE-TEMP-F for creating temp copy."
 (when (eq window-system 'ns)
   (setq markdown-command "multimarkdown")
   (setq markdown-open-command "marked2"))
-
+(defun markdown-preview-file ()
+  "run Marked on the current file and revert the buffer"
+  (interactive)
+  (shell-command
+   (format "open -a \"/Applications/Marked 2.app\" %s"
+       (shell-quote-argument (buffer-file-name))))
+)
+(global-set-key "\C-cm" 'markdown-preview-file)
 
 ;; https://github.com/emacs-jp/init-loader
 (require 'init-loader)
