@@ -46,7 +46,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml
+    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode
    ))
 
 ;; リストのパッケージをインストール
@@ -61,10 +61,6 @@
 
 ;; el-getがインストールされていれば有効化、そうでなければgithubからインストール
 ;; (http://tarao.hatenablog.com/entry/20150221/1424518030)
-
-
-
-
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -76,7 +72,7 @@
 ;; elgetでリストの内容をインストール
 (defvar my/el-get-packages
   '(
-    howm egg init-loader gtags emmet-mode
+    howm egg init-loader gtags emmet-mode py-autopep8
    ))
 (el-get 'sync my/el-get-packages)
 
@@ -1022,3 +1018,45 @@ Use CREATE-TEMP-F for creating temp copy."
     (save-buffer)
     (kill-buffer nill)))
 (define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yaml-mode wgrep web-mode use-package undohist undo-tree smex slim-mode scss-mode rinari rhtml-mode point-undo nxml-mode moccur-edit markdown-mode js2-mode ido-vertical-mode ido-ubiquitous helm flymake-yaml flymake-css flycheck flx-ido eruby-mode emoji-fontset elscreen ctags auto-complete anything))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; python
+(require 'py-autopep8)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (define-key python-mode-map "\"" 'electric-pair)
+            (define-key python-mode-map "\'" 'electric-pair)
+            (define-key python-mode-map "(" 'electric-pair)
+            (define-key python-mode-map "[" 'electric-pair)
+            (define-key python-mode-map "{" 'electric-pair)
+            (define-key python-mode-map (kbd "C-c F") 'py-autopep8)          ; バッファ全体のコード整形
+            (define-key python-mode-map (kbd "C-c f") 'py-autopep8-region)   ; 選択リジョン内のコード整形
+            ))
+;; 保存時にバッファ全体を自動整形する
+(add-hook 'before-save-hook 'py-autopep8-before-save)
+
+(defun electric-pair ()
+  "Insert character pair without sournding spaces"
+  (interactive)
+  (let (parens-require-spaces)
+    (insert-pair)))
+(add-hook 'python-mode-hook '(lambda () 
+     (define-key python-mode-map "\C-m" 'newline-and-indent)))
+;; python pep8 auto formatting
+;; http://qiita.com/fujimisakari/items/74e32eddb78dff4be585
+
+;; golang
+(add-hook 'before-save-hook 'gofmt-before-save)
