@@ -185,3 +185,13 @@ zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd () { vcs_info }
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+
+# emacs 設定
+alias E="emacsclient -t"
+alias kill-emacs="emacsclient -e '(kill-emacs)'"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/lanocci/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/lanocci/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/lanocci/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lanocci/google-cloud-sdk/completion.zsh.inc'; fi

@@ -46,7 +46,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode
+    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode ensime groovy-mode
    ))
 
 ;; リストのパッケージをインストール
@@ -1009,7 +1009,7 @@ Use CREATE-TEMP-F for creating temp copy."
 (setq howm-directory (concat user-emacs-directory "howm"))
 (setq howm-menu-lang 'ja)
 (setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
-(when (require 'howm-mode nil t)
+(when (require 'howm nil t)
   (define-key global-map (kbd "C-c ,,") 'howm-menu))
 (defun howm-save-buffer-and-kill ()
   (interactive)
@@ -1060,3 +1060,6 @@ Use CREATE-TEMP-F for creating temp copy."
 
 ;; golang
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+(setq x-select-enable-clipboard t)
+
