@@ -46,10 +46,10 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package undohist undo-tree anything elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck helm nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ctags ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode ensime groovy-mode
+    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode ensime groovy-mode terraform-mode sbt-mode
    ))
 
-;; リストのパッケージをインストール
+; リストのパッケージをインストール
 (let ((not-installed
        (cl-loop for x in my/packages
                 when (not (package-installed-p x))
@@ -1063,3 +1063,30 @@ Use CREATE-TEMP-F for creating temp copy."
 
 (setq x-select-enable-clipboard t)
 
+;; ensime色指定
+(add-hook 'compilation-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook 'sbt-mode)
+(add-hook 'compilation-filter-hook
+          '(lambda ()
+             (let ((start-marker (make-marker))
+                   (end-marker (process-mark (get-buffer-process (current-buffer)))))
+               (set-marker start-marker (point-min))
+                              (ansi-color-apply-on-region start-marker end-marker)))) 
+
+(setq x-select-enable-clipboard t)
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+(if (eq system-type 'darwin)
+        (progn
+          (defun copy-from-osx ()
+            (shell-command-to-string "reattach-to-user-namespace pbpaste"))
+          (defun paste-to-osx (text &optional push)
+            (let ((process-connection-type nil))
+              (let ((proc (start-process "pbcopy" "*Messages*" "reattach-to-user-namespace" "pbcopy")))
+                (process-send-string proc text)
+                (process-send-eof proc))))
+          (setq interprogram-cut-function 'paste-to-osx)
+          (setq interprogram-paste-function 'copy-from-osx)
+          )
+      (message "This platform is not mac")
+)

@@ -195,3 +195,5 @@ if [ -f '/Users/lanocci/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/la
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/lanocci/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lanocci/google-cloud-sdk/completion.zsh.inc'; fi
+
+export EDITOR='emacsc -nw'
