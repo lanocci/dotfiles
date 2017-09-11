@@ -74,11 +74,11 @@
     (eval-print-last-sexp)))
 
 ;; elgetでリストの内容をインストール
-(defvar my/el-get-packages
-  '(
-    howm egg init-loader gtags emmet-mode py-autopep8
-   ))
-(el-get 'sync my/el-get-packages)
+;; (defvar my/el-get-packages
+;;   '(
+;;     howm egg init-loader gtags emmet-mode py-autopep8
+;;    ))
+;; (el-get 'sync my/el-get-packages)
 
 
 ;; load-path を追加する関数を定義
@@ -94,7 +94,7 @@
 ;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
 ;; (add-to-load-path "elisp" "conf" "public_repos")
 
-(require 'egg)
+;; (require 'egg)				
 
 ;; ターミナル以外はツールバー、スクロールバーを非表示
 (when window-system
@@ -838,8 +838,8 @@ Use CREATE-TEMP-F for creating temp copy."
   (autoload 'svn-status "psvn" "Run `svn status'." t))
 
 ;; GitフロントエンドEggの設定
-(when (executable-find "git")
-  (require 'egg nil t))
+;; (when (executable-find "git")
+;;   (require 'egg nil t))
 
 
 ;; multi-termの設定
@@ -984,34 +984,35 @@ pp  (shell-command
 (global-set-key "\C-cm" 'markdown-preview-file)
 
 ;; https://github.com/emacs-jp/init-loader
-(require 'init-loader)
-(init-loader-load "~/.emacs.d/conf")
+;; (require 'init-loader)
+;;(init-loader-load "~/.emacs.d/conf")
 
 ;; emmet-mode
 ;; http://qiita.com/ironsand/items/55f2ced218949efbb1fb
-(require 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; マークアップ言語全部で使う
-(add-hook 'nXML-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode) ;; CSSにも使う
-(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;; indent はスペース2個
-(eval-after-load "emmet-mode"
-  '(define-key emmet-mode-keymap (kbd "C-j") nil)) ;; C-j は newline のままにしておく
-; (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
-(define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
+;; (require 'emmet-mode)
+;; (add-hook 'sgml-mode-hook 'emmet-mode) ;; マークアップ言語全部で使う
+;; (add-hook 'nXML-mode-hook 'emmet-mode)
+;; (add-hook 'css-mode-hook  'emmet-mode) ;; CSSにも使う
+;; (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;; indent はスペース2個
+;; (eval-after-load "emmet-mode"
+;;   '(define-key emmet-mode-keymap (kbd "C-j") nil)) ;; C-j は newline のままにしておく
+;; ; (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
+;; (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
 
 ;;howm
-(setq howm-directory (concat user-emacs-directory "howm"))
-(setq howm-menu-lang 'ja)
-(setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
-(when (require 'howm nil t)
-  (define-key global-map (kbd "C-c ,,") 'howm-menu))
-(defun howm-save-buffer-and-kill ()
-  (interactive)
-  (when (and (buffer-file-name)
-             (string-match "\\.howm" (buffer-file-name)))
-    (save-buffer)
-    (kill-buffer nill)))
-(define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
+;; (setq howm-directory (concat user-emacs-directory "howm"))
+;; (setq howm-menu-lang 'ja)
+;; (setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
+;; (when (require 'howm nil t)
+;;   (define-key global-map (kbd "C-c ,,") 'howm-menu))
+;; (defun howm-save-buffer-and-kill ()
+;;   (interactive)
+;;   (when (and (buffer-file-name)
+;;              (string-match "\\.howm" (buffer-file-name)))
+;;     (save-buffer)
+;;     (kill-buffer nill)))
+;; (define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
+ 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -1019,7 +1020,7 @@ pp  (shell-command
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ace-jump-mode helm-ag helm-ls-git yaml-mode wgrep web-mode use-package undohist undo-tree smex slim-mode scss-mode rinari rhtml-mode nxml-mode moccur-edit markdown-mode js2-mode ido-vertical-mode ido-ubiquitous helm flymake-yaml flymake-css flycheck flx-ido eruby-mode emoji-fontset elscreen ctags auto-complete anything))))
+    (magit ace-jump-mode helm-ag helm-ls-git yaml-mode wgrep web-mode use-package undohist undo-tree smex slim-mode scss-mode rinari rhtml-mode nxml-mode moccur-edit markdown-mode js2-mode ido-vertical-mode ido-ubiquitous helm flymake-yaml flymake-css flycheck flx-ido eruby-mode emoji-fontset elscreen ctags auto-complete anything))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -1028,7 +1029,7 @@ pp  (shell-command
  )
 
 ;; python
-(require 'py-autopep8)
+;;(require 'py-autopep8)
 (add-hook 'python-mode-hook
           (lambda ()
             (define-key python-mode-map "\"" 'electric-pair)
