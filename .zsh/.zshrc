@@ -137,6 +137,10 @@ alias less='less -NM'
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
 
+# git系alias
+alias gre='git pull --rebase upstream master'
+alias gcb='git checkout -b'
+
 # cdの後にlsを実行
 chpwd() { ls -aF }
 
@@ -187,7 +191,8 @@ precmd () { vcs_info }
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 # emacs 設定
-alias E="emacsclient -t"
+alias e="emacsclient -t"
+alias E="emacsclient -c -a emacs"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -196,4 +201,5 @@ if [ -f '/Users/lanocci/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/la
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/lanocci/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lanocci/google-cloud-sdk/completion.zsh.inc'; fi
 
-export EDITOR='emacsc -nw'
+[[ -s "/Users/lanocci/.gvm/scripts/gvm" ]] && source "/Users/lanocci/.gvm/scripts/gvm"
+
