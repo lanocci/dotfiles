@@ -2,7 +2,6 @@
 
 (require 'cl)
 
-
 ;; パスを通す(http://moonstruckdrops.github.io/blog/2013/03/24/markdown-mode/)
 (dolist (dir (list
               "/sbin"
@@ -18,7 +17,6 @@
  (when (and (file-exists-p dir) (not (member dir exec-path)))
    (setenv "PATH" (concat dir ":" (getenv "PATH")))
    (setq exec-path (append (list dir) exec-path))))
-
 
 ;; スタートアップメッセージを非表示
 (setq inhibit-startup-screen t)
@@ -36,17 +34,23 @@
   (add-to-list 'package-archives
                '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
   ;; インストールしたパッケージにロードパスを通して読み込む
   (package-initialize))
 
 ;;; いつも使うパッケージがなければ先にインストール
 ;;; cf. http://qiita.com/hmikisato/items/043355e1e2dd7ad8cd43
 
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit point-undo js2-mode rhtml-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode ensime groovy-mode terraform-mode sbt-mode
+    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode rhtml-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree
    ))
 
 ; リストのパッケージをインストール
@@ -359,7 +363,6 @@
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
   (ac-config-default))
 
-
 (when (require 'color-moccur nil t)
   ;; M-oにoccur-by-moccurを割り当て
   (define-key global-map (kbd "M-o") 'occur-by-moccur)
@@ -371,7 +374,7 @@
   ;; Migemoを利用できる環境であればMigemoを使う
   (when (and (executable-find "cmigemo")
              (require 'migemo nil t))
-    (setq moccur-use-migemo t)))
+p    (setq moccur-use-migemo t)))
 
 (require 'moccur-edit nil t)
 ;; moccur-edit-finish-editと同時にファイルを保存する
@@ -391,15 +394,6 @@
 
 (when (require 'undo-tree nil t)
   (global-undo-tree-mode))
-
-
-;; point-undoの設定
-(when (require 'point-undo nil t)
-  ;; (define-key global-map [f5] 'point-undo)
-  ;; (define-key global-map [f6] 'point-redo)
-  (define-key global-map (kbd "M-[") 'point-undo)
-  (define-key global-map (kbd "M-]") 'point-redo)
-  )
 
 ;; ElScreenのプレフィックスキーを変更する（初期値はC-z）
 ;; (setq elscreen-prefix-key (kbd "C-t"))
@@ -983,7 +977,7 @@ Use CREATE-TEMP-F for creating temp copy."
 (defun markdown-preview-file ()
   "run Marked on the current file and revert the buffer"
   (interactive)
-  (shell-command
+pp  (shell-command
    (format "open -a \"/Applications/Marked 2.app\" %s"
        (shell-quote-argument (buffer-file-name))))
 )
@@ -1002,7 +996,7 @@ Use CREATE-TEMP-F for creating temp copy."
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;; indent はスペース2個
 (eval-after-load "emmet-mode"
   '(define-key emmet-mode-keymap (kbd "C-j") nil)) ;; C-j は newline のままにしておく
-(keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
+; (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
 (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
 
 ;;howm
@@ -1025,7 +1019,7 @@ Use CREATE-TEMP-F for creating temp copy."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode wgrep web-mode use-package undohist undo-tree smex slim-mode scss-mode rinari rhtml-mode point-undo nxml-mode moccur-edit markdown-mode js2-mode ido-vertical-mode ido-ubiquitous helm flymake-yaml flymake-css flycheck flx-ido eruby-mode emoji-fontset elscreen ctags auto-complete anything))))
+    (ace-jump-mode helm-ag helm-ls-git yaml-mode wgrep web-mode use-package undohist undo-tree smex slim-mode scss-mode rinari rhtml-mode nxml-mode moccur-edit markdown-mode js2-mode ido-vertical-mode ido-ubiquitous helm flymake-yaml flymake-css flycheck flx-ido eruby-mode emoji-fontset elscreen ctags auto-complete anything))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -1063,6 +1057,8 @@ Use CREATE-TEMP-F for creating temp copy."
 
 (setq x-select-enable-clipboard t)
 
+
+
 ;; ensime色指定
 (add-hook 'compilation-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -1072,7 +1068,7 @@ Use CREATE-TEMP-F for creating temp copy."
              (let ((start-marker (make-marker))
                    (end-marker (process-mark (get-buffer-process (current-buffer)))))
                (set-marker start-marker (point-min))
-                              (ansi-color-apply-on-region start-marker end-marker)))) 
+                              (ansi-color-apply-on-region start-marker end-marker))))
 
 (setq x-select-enable-clipboard t)
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
@@ -1090,3 +1086,57 @@ Use CREATE-TEMP-F for creating temp copy."
           )
       (message "This platform is not mac")
 )
+
+(use-package ensime
+  :ensure t
+  :pin melpa-stable)
+
+; neo-tree
+;; 隠しファイルをデフォルトで表示
+(setq neo-show-hidden-files t)
+
+;; neotree でファイルを新規作成した後、自動的にファイルを開く
+(setq neo-create-file-auto-open t)
+
+;; delete-other-window で neotree ウィンドウを消さない
+(setq neo-persist-show t)
+
+;; キーバインドをシンプルにする
+(setq neo-keymap-style 'concise)
+
+;; neotree ウィンドウを表示する毎に current file のあるディレクトリを表示する
+(setq neo-smart-open t)
+
+;; たぶんまだ動かない https://github.com/jaypei/emacs-neotree/issues/105
+(setq neo-vc-integration '(face char))
+
+;; popwin との共存
+(when neo-persist-show
+  (add-hook 'popwin:before-popup-hook
+            (lambda () (setq neo-persist-show nil)))
+  (add-hook 'popwin:after-popup-hook
+            (lambda () (setq neo-persist-show t))))
+
+; scala mode
+(add-hook 'scala-mode-hook 'my-scala-mode-hook)
+(defun my-scala-mode-hook ()
+  (setq scala-indent:use-javadoc-style t))
+
+; magit
+(unless (package-installed-p 'magit)
+  (package-refresh-contents) (package-install 'magit))
+
+(setenv "PATH" (concat "PATH_TO_SBT:" (getenv "PATH")))
+(setenv "PATH" (concat "PATH_TO_SCALA:" (getenv "PATH")))
+
+(unless (package-installed-p 'helm-ls-git)
+  (package-refresh-contents) (package-install 'helm-ls-git))
+
+(unless (package-installed-p 'helm-ag)
+  (package-refresh-contents) (package-install 'helm-ag))
+
+(unless (package-installed-p 'ace-jump-mode)
+  (package-refresh-contents) (package-install 'ace-jump-mode))
+
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
