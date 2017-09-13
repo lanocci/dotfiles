@@ -194,7 +194,6 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 alias e="emacsclient -t"
 alias E="emacsclient -c -a emacs"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
-emacs --daemon
 
 [[ -s "/Users/lanocci/.gvm/scripts/gvm" ]] && source "/Users/lanocci/.gvm/scripts/gvm"
 

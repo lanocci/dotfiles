@@ -50,7 +50,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode rhtml-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree
+    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree
    ))
 
 ; リストのパッケージをインストール
@@ -385,12 +385,9 @@ p    (setq moccur-use-migemo t)))
 ;; wgrepの設定
 (require 'wgrep nil t)
 
-
-
 ;; undohistの設定
 (when (require 'undohist nil t)
   (undohist-initialize))
-
 
 (when (require 'undo-tree nil t)
   (global-undo-tree-mode))
@@ -404,6 +401,8 @@ p    (setq moccur-use-migemo t)))
       (define-key elscreen-map (kbd "C-z") 'iconify-or-deiconify-frame)
     (define-key elscreen-map (kbd "C-z") 'suspend-emacs)))
 
+;; .gdslファイルをgroovy-modeで開く
+(add-to-list 'auto-mode-alist '("\\.[sx]?gdsl?\\(\\.[a-zA-Z_]+\\)?\\'" . groovy-mode))
 
 ;; cua-modeの設定
 (cua-mode t) ; cua-modeをオン
@@ -767,11 +766,11 @@ Use CREATE-TEMP-F for creating temp copy."
 ;;; Rails Development
 
 ;;; Rinari
-(require 'rinari)
-(when (require 'rhtml-mode nil t)
-   (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . rhtml-mode)))
-(add-hook 'rhtml-mode-hook
-    (lambda () (rinari-launch)))
+;; (require 'rinari)
+;; (when (require 'rhtml-mode nil t)
+;;    (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . rhtml-mode)))
+;; (add-hook 'rhtml-mode-hook
+;;     (lambda () (rinari-launch)))
 
 ;; projectile 
 
@@ -1071,6 +1070,7 @@ pp  (shell-command
                (set-marker start-marker (point-min))
                               (ansi-color-apply-on-region start-marker end-marker))))
 
+;; OSとクリップボード共有
 (setq x-select-enable-clipboard t)
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 (if (eq system-type 'darwin)
@@ -1141,3 +1141,5 @@ pp  (shell-command
 
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+(global-set-key (kbd "C-x g") 'magit-status)
