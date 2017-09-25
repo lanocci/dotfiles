@@ -50,7 +50,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree
+    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree all-the-icons
    ))
 
 ; リストのパッケージをインストール
@@ -976,7 +976,7 @@ Use CREATE-TEMP-F for creating temp copy."
 (defun markdown-preview-file ()
   "run Marked on the current file and revert the buffer"
   (interactive)
-pp  (shell-command
+  (shell-command
    (format "open -a \"/Applications/Marked 2.app\" %s"
        (shell-quote-argument (buffer-file-name))))
 )
@@ -1143,3 +1143,19 @@ pp  (shell-command
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 (global-set-key (kbd "C-x g") 'magit-status)
+
+(defun forward-word+1 ()
+  "forward-word で単語の先頭へ移動する"
+  (interactive)
+  (forward-word)
+  (forward-char))
+
+(global-set-key (kbd "M-f") 'forward-word+1)
+
+(require 'all-the-icons)
+(require 'neotree)
+;; 隠しファイルをデフォルトで表示
+(setq neo-show-hidden-files t)
+;; cotrol + q でneotreeを起動
+(global-set-key "\C-q" 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))

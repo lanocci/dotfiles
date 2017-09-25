@@ -178,6 +178,8 @@ function mkcd() {
     fi
 }
 
+alias ktl="kubectl"
+
 # git設定
 RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
 autoload -Uz vcs_info
