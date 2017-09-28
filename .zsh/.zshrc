@@ -205,3 +205,6 @@ if [ -f '/Users/a14885/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/a14885/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/a14885/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# postgres
+export PGDATA=/usr/local/var/postgres

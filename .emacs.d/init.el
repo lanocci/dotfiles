@@ -50,7 +50,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree all-the-icons
+    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree all-the-icons wakatime-mode
    ))
 
 ; リストのパッケージをインストール
@@ -969,8 +969,7 @@ Use CREATE-TEMP-F for creating temp copy."
   (setq markdown-command "perl C:/strawberry/perl/bin/Markdown.pl"))
 
 ;; macOS
-;;(when (eq window-system 'darwin)
-(when (eq window-system 'ns)
+(when (eq system-type 'darwin)
   (setq markdown-command "multimarkdown")
   (setq markdown-open-command "marked2"))
 (defun markdown-preview-file ()
@@ -1019,7 +1018,7 @@ Use CREATE-TEMP-F for creating temp copy."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (magit ace-jump-mode helm-ag helm-ls-git yaml-mode wgrep web-mode use-package undohist undo-tree smex slim-mode scss-mode rinari rhtml-mode nxml-mode moccur-edit markdown-mode js2-mode ido-vertical-mode ido-ubiquitous helm flymake-yaml flymake-css flycheck flx-ido eruby-mode emoji-fontset elscreen ctags auto-complete anything))))
+    (wakatime-mode magit ace-jump-mode helm-ag helm-ls-git yaml-mode wgrep web-mode use-package undohist undo-tree smex slim-mode scss-mode rinari rhtml-mode nxml-mode moccur-edit markdown-mode js2-mode ido-vertical-mode ido-ubiquitous helm flymake-yaml flymake-css flycheck flx-ido eruby-mode emoji-fontset elscreen ctags auto-complete anything))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -1159,3 +1158,8 @@ Use CREATE-TEMP-F for creating temp copy."
 ;; cotrol + q でneotreeを起動
 (global-set-key "\C-q" 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+(global-wakatime-mode)
+
+; digdag
+(add-to-list 'auto-mode-alist '("\\.dig\\'" . yaml-mode))
