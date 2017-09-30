@@ -208,3 +208,5 @@ if [ -f '/Users/a14885/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then so
 
 # postgres
 export PGDATA=/usr/local/var/postgres
+
+fortune | cowsay -f `ls -1 /usr/local/Cellar/cowsay/3.04/share/cows/ | gsort -R | head -1` -n
