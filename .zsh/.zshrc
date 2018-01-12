@@ -319,6 +319,17 @@ function mkcd() {
 
 alias ktl="kubectl"
 
+
+# Ctl-rでhistroryをpecoで開く
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
+
 # git設定
 # RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
 # autoload -Uz vcs_info
@@ -357,3 +368,11 @@ function peco-history-selection() {
 
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
+
+# GO
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# display fortune for each login
+fortune | cowsay -f `ls -1 /usr/local/Cellar/cowsay/3.04/share/cows/ | gsort -R | head -1` -n
+

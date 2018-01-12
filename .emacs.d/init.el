@@ -50,7 +50,7 @@
 ;; インストールするパッケージのリスト
 (defvar my/packages
   '(
-    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree all-the-icons wakatime-mode
+    use-package anything helm undohist ctags undo-tree elscreen markdown-mode eruby-mode slim-mode wgrep web-mode flycheck nxml-mode auto-complete scss-mode flymake-css rinari color-moccur moccur-edit js2-mode ido-vertical-mode emoji-fontset smex ido-ubiquitous flx-ido inf-ruby yaml-mode flymake-yaml python-mode go-mode scala-mode groovy-mode terraform-mode sbt-mode ensime neotree all-the-icons wakatime-mode go-eldoc
    ))
 
 ; リストのパッケージをインストール
@@ -1163,3 +1163,20 @@ Use CREATE-TEMP-F for creating temp copy."
 
 ; digdag
 (add-to-list 'auto-mode-alist '("\\.dig\\'" . yaml-mode))
+
+; Go
+(setenv "GOPATH" "/Users/lanocci/go")
+(add-to-list 'exec-path (expand-file-name "/Users/lanocci/go/bin"))
+
+(use-package go-mode
+  :config
+  (bind-keys :map go-mode-map
+         ("M-." . godef-jump)
+         ("M-," . pop-tag-mark))
+  (add-hook 'go-mode-hook '(lambda () (setq tab-width 2)))
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save))
+
+(use-package go-eldoc
+  :config
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
