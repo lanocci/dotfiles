@@ -1,7 +1,7 @@
 export LANG=ja_JP.UTF-8
 
-# emacs keybind
-bindkey=-e
+# bindkey -v
+# emacs keybind bindkey=-e
 
 # 補完機能
 autoload -U compinit
@@ -270,15 +270,43 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias vi='vim'
-alias cat='cat -n'
+# alias cat='cat -n'
 alias less='less -NM'
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
 alias prague='cd ~/dev/prague'
+alias pk='cd ~/dev/prague-k8s'
 
 # git系alias
 alias gre='git pull --rebase upstream master'
+alias gcm='git checkout master'
 alias gcb='git checkout -b'
+# kubectl aliases
+alias k='kubectl'
+
+
+## pods
+alias kg='kubectl get'
+alias kgpo='kubectl get pods'
+alias kgpow='kubectl get pods --watch'
+alias kdpo='kubectl describe pods'
+## deployment
+alias kgd='kubectl get deployment'
+alias kdd='kubectl describe deployment'
+## service
+alias kgs='kubectl get services'
+alias kds='kubectl describe services'
+## ingress
+alias kgi='kubectl get ingress'
+alias kdi='kubectl describe ingress'
+## configmap
+alias kdcm='kubectl descirbe configmap'
+## apply
+alias ka='kubectl apply -f'
+
+# gcloud compute
+alias gceprague='gcloud compute ssh --project cyberagent-192'
+alias gcepraguedev='gcloud compute ssh --project cyberagent-194'
 
 # cdの後にlsを実行
 chpwd() { ls -aF }
@@ -317,9 +345,6 @@ function mkcd() {
     fi
 }
 
-alias ktl="kubectl"
-
-
 # Ctl-rでhistroryをpecoで開く
 function peco-history-selection() {
     BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
@@ -350,12 +375,6 @@ alias kill-emacs="emacsclient -e '(kill-emacs)'"
 [[ -s "/Users/lanocci/.gvm/scripts/gvm" ]] && source "/Users/lanocci/.gvm/scripts/gvm"
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/a14885/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/a14885/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/a14885/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/a14885/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 # postgres
 export PGDATA=/usr/local/var/postgres
 
@@ -374,3 +393,20 @@ bindkey '^R' peco-history-selection
 #if [ $commands[kubectl] ]; then
 #  source <(kubectl completion zsh)
 #fi
+#
+export KUBE_EDITOR="vim"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/a14885/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/a14885/y/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/a14885/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/a14885/y/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+export HISTFILE=~/.zhistory
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
