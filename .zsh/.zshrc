@@ -374,6 +374,11 @@ alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
 [[ -s "/Users/lanocci/.gvm/scripts/gvm" ]] && source "/Users/lanocci/.gvm/scripts/gvm"
 
+# The next line updates PATH for the Google Cloud SDK.	
+if [ -f '/Users/a14885/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/a14885/Downloads/google-cloud-sdk/path.zsh.inc'; fi	
+
+ # The next line enables shell command completion for gcloud.	
+if [ -f '/Users/a14885/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/a14885/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # postgres
 export PGDATA=/usr/local/var/postgres
