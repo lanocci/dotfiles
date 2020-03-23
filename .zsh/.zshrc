@@ -276,6 +276,10 @@ export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
 alias prague='cd ~/dev/prague'
 alias pk='cd ~/dev/prague-k8s'
+alias jk='cd ~/work/influencer-joker'
+alias hq='cd ~/work/influencer-harley-quinn'
+alias cw='cd ~/work/influencer-cat-woman'
+alias it='cd ~/work/influencer-terraform'
 
 # git系alias
 alias gre='git pull --rebase upstream master'
@@ -409,9 +413,20 @@ if [ -f '/Users/a14885/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/U
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
+# RUST
+export PATH=$PATH:$HOME/.cargo/bin
+
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export HISTFILE=~/.zhistory
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+export DRONE_SERVER=https://drone-ee.cyberagent.group
+export DRONE_TOKEN=MgWm65ie66gunlUK3E90mZmmBZIXCFXx
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+# starship
+#eval "$(starship init zsh)"
