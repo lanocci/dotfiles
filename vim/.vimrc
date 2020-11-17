@@ -4,8 +4,7 @@ nnoremap Y y$
 " set the runtime path to include Vundle and initialize
 " set rtp+=~/.vim/bundle/Vundle.vim
 " call vundle#begin()
-" " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
+" " alternatively, pass a path where Vundle should install plugins " "call vundle#begin('~/some/path/here')
 " 
 " " let Vundle manage Vundle, required
 " Plugin 'VundleVim/Vundle.vim'
@@ -87,7 +86,10 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'tpope/vim-commentary'
+Plug 'itchyny/lightline.vim'
 call plug#end()
+
+set laststatus=2
 
 " ファイルタイプ別のVimプラグイン/インデントを有効にする
 filetype plugin indent on

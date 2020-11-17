@@ -282,8 +282,10 @@ alias cw='cd ~/work/influencer-cat-woman'
 alias it='cd ~/work/influencer-terraform'
 
 # git系alias
-alias gre='git pull --rebase upstream master'
-alias gcm='git checkout master'
+alias gret='git pull --rebase upstream master'
+alias gre='git pull --rebase upstream main'
+alias gcmt='git checkout master'
+alias gcm='git checkout main'
 alias gcb='git checkout -b'
 # kubectl aliases
 alias k='kubectl'
@@ -430,3 +432,25 @@ export PATH="$HOME/.serverless/bin:$PATH"
 
 # starship
 #eval "$(starship init zsh)"
+
+# https://fromatom.hatenablog.com/entry/2020/03/31/135410
+function peco-checkout-pull-request () {
+    local selected_pr_id=$(gh pr list | peco | awk '{ print $1 }')
+    if [ -n "$selected_pr_id" ]; then
+        BUFFER="gh pr checkout ${selected_pr_id}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-checkout-pull-request
+alias 'ghpr'='peco-checkout-pull-request'
+
+alias 'tf'='terraform'
+export PATH="$HOME/.nodenv/bin:$PATH"
+eval "$(nodenv init -)"
+export DRONE_TOKEN=MgWm65ie66gunlUK3E90mZmmBZIXCFXx
+export DRONE_SERVER=https://drone-ee.cyberagent.group
+setopt interactivecomments
+
+# RUST Path
+export PATH="$HOME/.cargo/bin:$PATH"
