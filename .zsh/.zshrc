@@ -454,3 +454,4 @@ setopt interactivecomments
 
 # RUST Path
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/opt/helm@2/bin:$PATH"
