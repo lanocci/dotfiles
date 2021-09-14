@@ -280,6 +280,7 @@ alias jk='cd ~/work/influencer-joker'
 alias hq='cd ~/work/influencer-harley-quinn'
 alias cw='cd ~/work/influencer-cat-woman'
 alias it='cd ~/work/influencer-terraform'
+alias cg='cd ~/work/channel-growth'
 
 # git系alias
 alias gret='git pull --rebase upstream master'
@@ -424,9 +425,6 @@ export HISTFILE=~/.zhistory
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export DRONE_SERVER=https://drone-ee.cyberagent.group
-export DRONE_TOKEN=MgWm65ie66gunlUK3E90mZmmBZIXCFXx
-
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
 
@@ -448,10 +446,15 @@ alias 'ghpr'='peco-checkout-pull-request'
 alias 'tf'='terraform'
 export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init -)"
-export DRONE_TOKEN=MgWm65ie66gunlUK3E90mZmmBZIXCFXx
-export DRONE_SERVER=https://drone-ee.cyberagent.group
 setopt interactivecomments
 
 # RUST Path
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/helm@2/bin:$PATH"
+
+PATH="$PATH:/Users/a14885/development/flutter/bin"
+GEM_HOME="$HOME/.gem"
+PATH="$GEM_HOME/bin:$PATH"
+
+# snowql
+alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql

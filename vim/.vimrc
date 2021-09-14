@@ -54,6 +54,7 @@ set autoindent
 
 set ruler
 set number
+set relativenumber
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set wildmenu
