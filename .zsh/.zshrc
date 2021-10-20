@@ -99,8 +99,8 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 #zplug
-export ZPLUG_HOME=~/.zplug
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 #plugins
 zplug "b4b4r07/enhancd", use:init.sh
