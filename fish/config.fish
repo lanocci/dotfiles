@@ -23,4 +23,17 @@ set __fish_git_prompt_char_upstream_behind '-'
 # jump
 status --is-interactive; and source (jump shell fish | psub)
 
+#set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/lanocci/.ghcup/bin # ghcup-env
+
+# aliases
+abbr -a docker podman
+abbr -a pm podman
+abbr -a vim nvim
+alias vim=nvim
+abbr -a vi nvim
+alias vi=nvim
+
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/lanocci/.ghcup/bin # ghcup-env
+starship init fish | source
+
+
